@@ -37,19 +37,10 @@ namespace Group_3_Week_11_DB_API.Data
 
                 entity.Property(e => e.ClassRoomNumber)
                     .HasMaxLength(25)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasColumnName("classRoomNumber");
 
                 entity.Property(e => e.StartDate).HasColumnType("date");
-
-                entity.Property(e => e.SubjectId)
-                    .HasMaxLength(8)
-                    .IsUnicode(false)
-                    .HasColumnName("SubjectID");
-
-                entity.HasOne(d => d.Subject)
-                    .WithMany(p => p.Classes)
-                    .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("SubjectID");
             });
 
             modelBuilder.Entity<Faculty>(entity =>
@@ -79,7 +70,7 @@ namespace Group_3_Week_11_DB_API.Data
             modelBuilder.Entity<FacultyClass>(entity =>
             {
                 entity.HasKey(e => e.FacultyClassesId)
-                    .HasName("PK__Faculty___3192B6071393C6F0");
+                    .HasName("PK__Faculty___3192B607E109BBDC");
 
                 entity.ToTable("Faculty_Classes");
 
@@ -101,12 +92,14 @@ namespace Group_3_Week_11_DB_API.Data
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.FacultyClasses)
                     .HasForeignKey(d => d.ClassId)
-                    .HasConstraintName("FK__Faculty_C__Class__30F848ED");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Faculty_C__Class__66603565");
 
                 entity.HasOne(d => d.Faculty)
                     .WithMany(p => p.FacultyClasses)
                     .HasForeignKey(d => d.FacultyId)
-                    .HasConstraintName("FK__Faculty_C__Facul__31EC6D26");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Faculty_C__Facul__6754599E");
             });
 
             modelBuilder.Entity<Student>(entity =>
@@ -136,7 +129,7 @@ namespace Group_3_Week_11_DB_API.Data
             modelBuilder.Entity<StudentSchedule>(entity =>
             {
                 entity.HasKey(e => e.ScheduleId)
-                    .HasName("PK__Student___9C8A5B697A88BCC3");
+                    .HasName("PK__Student___9C8A5B69E2730BDA");
 
                 entity.ToTable("Student_Schedules");
 
@@ -162,12 +155,14 @@ namespace Group_3_Week_11_DB_API.Data
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.StudentSchedules)
                     .HasForeignKey(d => d.ClassId)
-                    .HasConstraintName("FK__Student_S__Class__2B3F6F97");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Student_S__Class__68487DD7");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentSchedules)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__Student_S__Stude__2C3393D0");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Student_S__Stude__693CA210");
             });
 
             modelBuilder.Entity<Subject>(entity =>
@@ -176,11 +171,6 @@ namespace Group_3_Week_11_DB_API.Data
                     .HasMaxLength(8)
                     .IsUnicode(false)
                     .HasColumnName("SubjectID");
-
-                entity.Property(e => e.ClassId)
-                    .HasMaxLength(8)
-                    .IsUnicode(false)
-                    .HasColumnName("ClassID");
 
                 entity.Property(e => e.SubjectCode)
                     .HasMaxLength(25)
@@ -193,11 +183,6 @@ namespace Group_3_Week_11_DB_API.Data
                 entity.Property(e => e.SubjectName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.Class)
-                    .WithMany(p => p.Subjects)
-                    .HasForeignKey(d => d.ClassId)
-                    .HasConstraintName("FK__Subjects__ClassI__267ABA7A");
             });
 
             OnModelCreatingPartial(modelBuilder);

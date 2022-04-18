@@ -7,18 +7,9 @@ namespace Group_3_Week_11_DB_API.Models
 {
     public partial class Subject
     {
-        public Subject()
-        {
-            Classes = new HashSet<Class>();
-        }
-
         public string SubjectId { get; set; }
-        public string ClassId { get; set; }
         public string SubjectCode { get; set; }
         public string SubjectName { get; set; }
         public string SubjectDescription { get; set; }
-
-        public virtual Class Class { get; set; }
-        public virtual ICollection<Class> Classes { get; set; }
     }
 }

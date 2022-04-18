@@ -11,18 +11,14 @@ namespace Group_3_Week_11_DB_API.Models
         {
             FacultyClasses = new HashSet<FacultyClass>();
             StudentSchedules = new HashSet<StudentSchedule>();
-            Subjects = new HashSet<Subject>();
         }
 
         public string ClassId { get; set; }
-        public string SubjectId { get; set; }
         public int? Credits { get; set; }
         public string ClassRoomNumber { get; set; }
         public DateTime? StartDate { get; set; }
 
-        public virtual Subject Subject { get; set; }
         public virtual ICollection<FacultyClass> FacultyClasses { get; set; }
         public virtual ICollection<StudentSchedule> StudentSchedules { get; set; }
-        public virtual ICollection<Subject> Subjects { get; set; }
     }
 }
