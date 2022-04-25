@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Group_3_Week_11_DB_API.Data;
 using Group_3_Week_11_DB_API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Group_3_Week_11_DB_API.Controllers
 {
@@ -23,6 +24,7 @@ namespace Group_3_Week_11_DB_API.Controllers
         }
 
         // GET: api/Students
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
@@ -30,6 +32,7 @@ namespace Group_3_Week_11_DB_API.Controllers
         }
 
         // GET: api/Students/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(string id)
         {
@@ -45,6 +48,7 @@ namespace Group_3_Week_11_DB_API.Controllers
 
         // PUT: api/Students/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(string id, Student student)
         {
@@ -76,6 +80,7 @@ namespace Group_3_Week_11_DB_API.Controllers
 
         // POST: api/Students
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
@@ -100,6 +105,7 @@ namespace Group_3_Week_11_DB_API.Controllers
         }
 
         // DELETE: api/Students/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(string id)
         {
