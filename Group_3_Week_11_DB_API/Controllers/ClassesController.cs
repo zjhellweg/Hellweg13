@@ -24,7 +24,7 @@ namespace Group_3_Week_11_DB_API.Controllers
         }
 
         // GET: api/Classes
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Class>>> GetClasses()
         {
